@@ -18,10 +18,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
-		_throw_dice()
-		print(get_result())
 
-func _throw_dice():
+func throw_dice():
 	pre_all_dice_throw.emit()
 	throw = []
 	var throw_index = 0
@@ -35,5 +33,6 @@ func _throw_dice():
 	post_all_dice_throw.emit()
 
 func get_result():
+	throw.sort()
 	return throw
 
