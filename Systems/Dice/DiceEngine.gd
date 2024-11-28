@@ -16,8 +16,6 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
 
 func throw_dice():
 	pre_all_dice_throw.emit()
