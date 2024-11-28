@@ -1,21 +1,11 @@
 extends Node
 
-var current_level: int = 1
-
 @onready
-var all_score_targets: Array[int] = initialize_all_scores_table()
-
-var score_target: int = 0
+var _all_score_targets: Array[int] = initialize_all_scores_table()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-
-
-func advance_level():
-	current_level += 1
-	score_target = all_score_targets[current_level]
-	
 
 func initialize_all_scores_table():
 	var score = 7 - 2
@@ -26,3 +16,5 @@ func initialize_all_scores_table():
 		scores.append(score)
 	return scores
 
+func get_score_target_at_level(level: int):
+	return _all_score_targets[level - 1]

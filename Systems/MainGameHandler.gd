@@ -8,27 +8,41 @@ var ScoreHandler = get_node("ScoreHandler")
 var InputHandler = get_node("InputHandler")
 
 @onready
-var score_target: int = ScoreHandler.score_target
+var score_target: int = ScoreHandler.get_score_target_at_level(1)
+var current_score: int = score_target
 
-var current_level = 0
-var current_score: int = 0
-var throws_left = 3
+var current_level: int = 0
 
-signal pre_result_calculation
-signal post_result_calculation
+var throws_left: int = 3
+var result_of_last_throw: int = 0
+var result_of_this_throw: int = 0
 
+signal pre_result_calculation(result_of_last_throw: int, throws_left: int)
+signal post_result_calculation(result_of_last_throw: int, result_of_this_throw: int, throws_left: int)
+
+signal bet_won(winning_score: int)
+signal bet_lost
 
 func throw_dice():
-	pre_result_calculation.emit()
+	pre_result_calculation.emit(result_of_this_throw, throws_left)
 	############################# 
 	if throws_left > 0:
 		throws_left -= 1
 		DiceEngine.throw_dice()
-		var result_of_last_throw = calculate_result(DiceEngine.get_result())
+		result_of_last_throw = result_of_this_throw
+		result_of_this_throw = calculate_result(DiceEngine.get_result())
 		print(result_of_last_throw)
-		
+		current_score -= result_of_this_throw
+	if throws_left <= 0:
+		if current_score > score_target:
+			bet_won.emit(current_score)
+			## Send to shop
+			## Get next score target
+		else:
+			bet_lost.emit()
+			## Make restart UI appear
 	#############################
-	post_result_calculation.emit()
+	post_result_calculation.emit(result_of_last_throw, result_of_this_throw)
 
 
 func calculate_result(dice_throw_array: Array[String]) -> int:
