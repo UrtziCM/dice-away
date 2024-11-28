@@ -1,7 +1,7 @@
 extends Node
 
 const Dice = preload("res://Dice.gd").Dice
-var dice_inventory: Array[Dice] = [Dice.dict["D6"]]
+var dice_inventory: Array[Dice] = [Dice.dict["D4"]]
 var throw: Array[String] = []
 # Called when the node enters the scene tree for the first time.
 signal pre_all_dice_throw
