@@ -6,7 +6,6 @@ var current_level: int = 1
 var all_score_targets: Array[int] = initialize_all_scores_table()
 
 var score_target: int = 0
-var current_score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +15,6 @@ func _ready():
 func advance_level():
 	current_level += 1
 	score_target = all_score_targets[current_level]
-	current_score = score_target
 	
 
 func initialize_all_scores_table():
@@ -28,6 +26,3 @@ func initialize_all_scores_table():
 		scores.append(score)
 	return scores
 
-
-func reduce_score_by(dice_roll: int):
-	current_score -= dice_roll
