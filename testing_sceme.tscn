@@ -2,13 +2,17 @@
 
 [ext_resource type="Script" path="res://Systems/Dice/DiceEngine.gd" id="1_3flvy"]
 [ext_resource type="Script" path="res://Systems/Score/ScoreHandler.gd" id="2_7xtwg"]
+[ext_resource type="Script" path="res://Systems/PlayerInput/InputHandler.gd" id="4_eepy5"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Game" type="Node" parent="."]
+script = ExtResource("1_mhp6s")
 
 [node name="DiceEngine" type="Node" parent="Game"]
 script = ExtResource("1_3flvy")
 
 [node name="ScoreHandler" type="Node" parent="Game"]
 script = ExtResource("2_7xtwg")
+[node name="InputHandler" type="Node" parent="Game"]
+script = ExtResource("4_eepy5")
