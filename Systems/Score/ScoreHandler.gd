@@ -12,6 +12,7 @@ var current_score: int = 0
 func _ready():
 	pass
 
+
 func advance_level():
 	current_level += 1
 	score_target = all_score_targets[current_level]
@@ -27,5 +28,6 @@ func initialize_all_scores_table():
 		scores.append(score)
 	return scores
 
-func reduce_score_by(dice_roll):
-	current_score -= dice_roll 
+
+func reduce_score_by(dice_roll: int):
+	current_score -= dice_roll
