@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ujclrloq1gvv"]
+[gd_scene load_steps=5 format=3 uid="uid://ujclrloq1gvv"]
 
 [ext_resource type="Script" path="res://Systems/Dice/DiceEngine.gd" id="1_3flvy"]
+[ext_resource type="Script" path="res://Systems/MainGameHandler.gd" id="1_mhp6s"]
 [ext_resource type="Script" path="res://Systems/Score/ScoreHandler.gd" id="2_7xtwg"]
 [ext_resource type="Script" path="res://Systems/PlayerInput/InputHandler.gd" id="4_eepy5"]
 
@@ -14,5 +15,6 @@ script = ExtResource("1_3flvy")
 
 [node name="ScoreHandler" type="Node" parent="Game"]
 script = ExtResource("2_7xtwg")
+
 [node name="InputHandler" type="Node" parent="Game"]
 script = ExtResource("4_eepy5")
