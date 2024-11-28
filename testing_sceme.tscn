@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ujclrloq1gvv"]
+
+[ext_resource type="Script" path="res://DiceEngine.gd" id="1_3flvy"]
+[ext_resource type="Script" path="res://ScoreHandler.gd" id="2_7xtwg"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="DiceEngine" type="Node" parent="."]
+script = ExtResource("1_3flvy")
+
+[node name="ScoreHandler" type="Node" parent="."]
+script = ExtResource("2_7xtwg")
