@@ -11,9 +11,10 @@ var InputHandler = get_node("InputHandler")
 var score_target: int = ScoreHandler.get_score_target_at_level(1)
 var current_score: int = score_target
 
-var current_level: int = 0
+var max_throws: int = 3
+var throws_left: int = max_throws
 
-var throws_left: int = 3
+var current_level: int = 0
 var result_of_last_throw: int = 0
 var result_of_this_throw: int = 0
 
@@ -38,6 +39,8 @@ func throw_dice():
 			bet_won.emit(current_score)
 			## Send to shop
 			## Get next score target
+			## Set next score target
+			## Set throws_left to max_throws
 		else:
 			bet_lost.emit()
 			## Make restart UI appear
