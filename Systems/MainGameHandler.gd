@@ -32,19 +32,25 @@ func throw_dice():
 		DiceEngine.throw_dice()
 		result_of_last_throw = result_of_this_throw
 		result_of_this_throw = calculate_result(DiceEngine.get_result())
-		print(result_of_last_throw)
 		current_score -= result_of_this_throw
 	if throws_left <= 0:
-		if current_score > score_target:
+		if current_score <= 0:
 			bet_won.emit(current_score)
 			## Send to shop
 			## Get next score target
+			print("win")
+			current_level += 1
+			score_target = ScoreHandler.get_score_target_at_level(current_level)
+			current_score = score_target
+			throws_left = max_throws
 			## Set next score target
 			## Set throws_left to max_throws
 		else:
 			bet_lost.emit()
+			print("lose")
 			## Make restart UI appear
 	#############################
+	print(result_of_this_throw)
 	post_result_calculation.emit(result_of_last_throw, result_of_this_throw)
 
 
