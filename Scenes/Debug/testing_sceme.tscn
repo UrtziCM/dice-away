@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ujclrloq1gvv"]
+[gd_scene load_steps=7 format=3 uid="uid://ujclrloq1gvv"]
 
 [ext_resource type="Script" path="res://Systems/MainGameHandler.gd" id="1_0118i"]
 [ext_resource type="Script" path="res://Systems/Dice/DiceEngine.gd" id="2_pvraa"]
 [ext_resource type="Script" path="res://Systems/Score/ScoreHandler.gd" id="3_y1uv0"]
 [ext_resource type="Script" path="res://Systems/PlayerInput/InputHandler.gd" id="4_t6o6p"]
+[ext_resource type="Script" path="res://Systems/UI/UIHandler.gd" id="5_8ebux"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dxos1"]
+font_size = 42
 
 [node name="Node2D" type="Node2D"]
 
@@ -18,3 +22,22 @@ script = ExtResource("3_y1uv0")
 
 [node name="InputHandler" type="Node" parent="Game"]
 script = ExtResource("4_t6o6p")
+
+[node name="UIHandler" type="Node" parent="Game"]
+script = ExtResource("5_8ebux")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Game/UIHandler"]
+
+[node name="ScoreTarget" type="Label" parent="Game/UIHandler/CanvasLayer"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 80.0
+text = "0"
+label_settings = SubResource("LabelSettings_dxos1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentScore" type="Label" parent="Game/UIHandler/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 22.3333
