@@ -28,7 +28,7 @@ signal bet_won(winning_score: int)
 signal bet_lost
 
 func _ready():
-	UIHandler.set_score_target_label(score_target)
+	UIHandler.setup_target_score(score_target, current_score)
 	
 func throw_dice():
 	pre_result_calculation.emit(result_of_this_throw, throws_left)
@@ -41,7 +41,7 @@ func throw_dice():
 		current_score -= result_of_this_throw
 		
 		#--# UI Updates #--#
-		UIHandler.set_current_score_label(current_score)
+		UIHandler.update_current_score(score_target, current_score)
 	if throws_left <= 0:
 		if current_score <= 0:
 			bet_won.emit(current_score)
@@ -55,7 +55,7 @@ func throw_dice():
 			throws_left = max_throws
 			
 			#--# UI Updates #--#
-			UIHandler.set_score_target_label(score_target)
+			UIHandler.setup_target_score(score_target, current_score)
 			
 		else:
 			bet_lost.emit()
