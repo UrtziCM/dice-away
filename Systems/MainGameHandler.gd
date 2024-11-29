@@ -38,20 +38,18 @@ func throw_dice():
 			bet_won.emit(current_score)
 			## Send to shop
 			## Get next score target
-			print("win")
 			current_level += 1
 			score_target = ScoreHandler.get_score_target_at_level(current_level)
-			current_score = score_target
-			throws_left = max_throws
 			## Set next score target
+			current_score = score_target
 			## Set throws_left to max_throws
+			throws_left = max_throws
 		else:
 			bet_lost.emit()
 			print("lose")
 			## Make restart UI appear
 	#############################
-	print(result_of_this_throw)
-	post_result_calculation.emit(result_of_last_throw, result_of_this_throw)
+	post_result_calculation.emit(result_of_last_throw, result_of_this_throw, throws_left)
 
 
 func calculate_result(dice_throw_array: Array[String]) -> int:
