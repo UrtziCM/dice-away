@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://ujclrloq1gvv"]
+[gd_scene load_steps=9 format=3 uid="uid://ujclrloq1gvv"]
 
 [ext_resource type="Script" path="res://Systems/MainGameHandler.gd" id="1_0118i"]
 [ext_resource type="Script" path="res://Systems/Dice/DiceEngine.gd" id="2_pvraa"]
 [ext_resource type="Script" path="res://Systems/Score/ScoreHandler.gd" id="3_y1uv0"]
 [ext_resource type="Script" path="res://Systems/PlayerInput/InputHandler.gd" id="4_t6o6p"]
 [ext_resource type="Script" path="res://Systems/UI/UIHandler.gd" id="5_8ebux"]
+[ext_resource type="Texture2D" uid="uid://bnjbi8qr0dh7" path="res://Assets/UI/Health/pixel_health_bar_under.png" id="6_0qdcy"]
+[ext_resource type="Texture2D" uid="uid://ce65bcg7xwvbt" path="res://Assets/UI/Health/pixel_health_bar_value.png" id="7_btojq"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_dxos1"]
-font_size = 42
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fqfnm"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,16 +29,23 @@ script = ExtResource("5_8ebux")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Game/UIHandler"]
 
-[node name="ScoreTarget" type="Label" parent="Game/UIHandler/CanvasLayer"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 80.0
-offset_bottom = 80.0
-text = "0"
-label_settings = SubResource("LabelSettings_dxos1")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="TargetScoreHealthBar" type="TextureProgressBar" parent="Game/UIHandler/CanvasLayer"]
+offset_left = 32.0
+offset_top = 23.0
+offset_right = 253.0
+offset_bottom = 74.0
+max_value = 1.0
+step = 0.025
+value = 1.0
+nine_patch_stretch = true
+texture_under = ExtResource("6_0qdcy")
+texture_progress = ExtResource("7_btojq")
+tint_progress = Color(0, 1, 0.0333333, 1)
 
-[node name="CurrentScore" type="Label" parent="Game/UIHandler/CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 22.3333
+[node name="EnemyTextureRect" type="TextureRect" parent="Game/UIHandler/CanvasLayer"]
+offset_left = 57.0
+offset_top = 96.0
+offset_right = 233.0
+offset_bottom = 272.0
+texture = SubResource("PlaceholderTexture2D_fqfnm")
+stretch_mode = 5
