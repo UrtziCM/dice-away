@@ -6,9 +6,12 @@ var DiceEngine = get_node("DiceEngine")
 var ScoreHandler = get_node("ScoreHandler")
 @onready
 var InputHandler = get_node("InputHandler")
+@onready
+var UIHandler = get_node("UIHandler")
 
 @onready
 var score_target: int = ScoreHandler.get_score_target_at_level(1)
+@onready
 var current_score: int = score_target
 
 var max_throws: int = 3
@@ -24,6 +27,9 @@ signal post_result_calculation(result_of_last_throw: int, result_of_this_throw: 
 signal bet_won(winning_score: int)
 signal bet_lost
 
+func _ready():
+	UIHandler.set_score_target_label(score_target)
+	
 func throw_dice():
 	pre_result_calculation.emit(result_of_this_throw, throws_left)
 	############################# 
@@ -33,6 +39,9 @@ func throw_dice():
 		result_of_last_throw = result_of_this_throw
 		result_of_this_throw = calculate_result(DiceEngine.get_result())
 		current_score -= result_of_this_throw
+		
+		#--# UI Updates #--#
+		UIHandler.set_current_score_label(current_score)
 	if throws_left <= 0:
 		if current_score <= 0:
 			bet_won.emit(current_score)
@@ -44,6 +53,10 @@ func throw_dice():
 			current_score = score_target
 			## Set throws_left to max_throws
 			throws_left = max_throws
+			
+			#--# UI Updates #--#
+			UIHandler.set_score_target_label(score_target)
+			
 		else:
 			bet_lost.emit()
 			print("lose")
