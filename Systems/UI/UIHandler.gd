@@ -16,14 +16,14 @@ func _flash_health(flash_duration: int):
 	var should_flash = true
 	var start_time = Time.get_unix_time_from_system()
 	while (should_flash):
-		if UIElements["TargetScoreHealthBar"].tint_progress != Color.RED:
-			UIElements["TargetScoreHealthBar"].tint_progress = Color.RED
+		if UIElements["TargetScoreHealthBar"].tint_progress == Color.RED:
+			UIElements["TargetScoreHealthBar"].tint_progress = Color.WHITE
 		else:
-			UIElements["TargetScoreHealthBar"].tint_progress = Color.GREEN
+			UIElements["TargetScoreHealthBar"].tint_progress = Color.RED
 		if start_time + flash_duration < Time.get_unix_time_from_system():
 			should_flash = false
 		await get_tree().create_timer(0.25).timeout
-	UIElements["TargetScoreHealthBar"].tint_progress = Color.GREEN
+	UIElements["TargetScoreHealthBar"].tint_progress = Color.RED
 
 func _flash_enemy(flash_duration: int):
 	var should_flash = true
