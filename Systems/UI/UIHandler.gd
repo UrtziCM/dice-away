@@ -1,7 +1,7 @@
 extends Node
 
 @onready
-var UILayer = get_node("CanvasLayer")
+var UILayer = get_node("UI")
 
 @onready
 var UIElements: Dictionary = {
