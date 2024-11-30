@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ujclrloq1gvv"]
+[gd_scene load_steps=11 format=3 uid="uid://ujclrloq1gvv"]
 
 [ext_resource type="Script" path="res://Systems/MainGameHandler.gd" id="1_0118i"]
 [ext_resource type="Script" path="res://Systems/Dice/DiceEngine.gd" id="2_pvraa"]
@@ -7,6 +7,12 @@
 [ext_resource type="Script" path="res://Systems/UI/UIHandler.gd" id="5_8ebux"]
 [ext_resource type="Texture2D" uid="uid://bnjbi8qr0dh7" path="res://Assets/UI/Health/pixel_health_bar_under.png" id="6_0qdcy"]
 [ext_resource type="Texture2D" uid="uid://ce65bcg7xwvbt" path="res://Assets/UI/Health/pixel_health_bar_value.png" id="7_btojq"]
+[ext_resource type="Shader" path="res://Shaders/Enemy/enemy_damage_flash.gdshader" id="8_l7qr8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4mdg"]
+shader = ExtResource("8_l7qr8")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fqfnm"]
 
@@ -27,9 +33,9 @@ script = ExtResource("4_t6o6p")
 [node name="UIHandler" type="Node" parent="Game"]
 script = ExtResource("5_8ebux")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Game/UIHandler"]
+[node name="UI" type="CanvasLayer" parent="Game/UIHandler"]
 
-[node name="TargetScoreHealthBar" type="TextureProgressBar" parent="Game/UIHandler/CanvasLayer"]
+[node name="TargetScoreHealthBar" type="TextureProgressBar" parent="Game/UIHandler/UI"]
 offset_left = 32.0
 offset_top = 23.0
 offset_right = 253.0
@@ -40,9 +46,10 @@ value = 1.0
 nine_patch_stretch = true
 texture_under = ExtResource("6_0qdcy")
 texture_progress = ExtResource("7_btojq")
-tint_progress = Color(0, 1, 0.0333333, 1)
+tint_progress = Color(1, 0, 0, 1)
 
-[node name="EnemyTextureRect" type="TextureRect" parent="Game/UIHandler/CanvasLayer"]
+[node name="EnemyTextureRect" type="TextureRect" parent="Game/UIHandler/UI"]
+material = SubResource("ShaderMaterial_j4mdg")
 offset_left = 57.0
 offset_top = 96.0
 offset_right = 233.0
