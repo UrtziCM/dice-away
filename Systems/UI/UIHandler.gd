@@ -29,14 +29,11 @@ func _flash_enemy(flash_duration: int):
 	var should_flash = true
 	var start_time = Time.get_unix_time_from_system()
 	while (should_flash):
-		if UIElements["EnemyTexture"].modulate == Color.WHITE:
-			UIElements["EnemyTexture"].modulate = Color.RED
-		else:
-			UIElements["EnemyTexture"].modulate = Color.WHITE
+		UIElements["EnemyTexture"].material.set_shader_parameter("active",should_flash)
 		if start_time + flash_duration < Time.get_unix_time_from_system():
 			should_flash = false
-		await get_tree().create_timer(0.25).timeout
-	UIElements["EnemyTexture"].modulate = Color.WHITE
+		await get_tree().create_timer(0.05).timeout
+	UIElements["EnemyTexture"].material.set_shader_parameter("active",false)
 
 func setup_target_score(max_score: int, score: int):
 	UIElements["TargetScoreHealthBar"].value = score / max_score
