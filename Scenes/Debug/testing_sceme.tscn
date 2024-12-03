@@ -30,6 +30,10 @@ script = ExtResource("3_y1uv0")
 [node name="InputHandler" type="Node" parent="Game"]
 script = ExtResource("4_t6o6p")
 
+[node name="ShopHandler" type="Node" parent="Game"]
+
+[node name="Shop" type="CanvasLayer" parent="Game/ShopHandler"]
+
 [node name="UIHandler" type="Node" parent="Game"]
 script = ExtResource("5_8ebux")
 
@@ -50,9 +54,9 @@ tint_progress = Color(1, 0, 0, 1)
 
 [node name="EnemyTextureRect" type="TextureRect" parent="Game/UIHandler/UI"]
 material = SubResource("ShaderMaterial_j4mdg")
-offset_left = 57.0
-offset_top = 96.0
-offset_right = 233.0
-offset_bottom = 272.0
+offset_left = 60.0
+offset_top = 117.0
+offset_right = 220.0
+offset_bottom = 277.0
 texture = SubResource("PlaceholderTexture2D_fqfnm")
 stretch_mode = 5

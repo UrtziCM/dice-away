@@ -42,10 +42,13 @@ func throw_dice():
 		
 		#--# UI Updates #--#
 		UIHandler.update_current_score(score_target, current_score)
+		UIHandler.show_damage_done(result_of_this_throw)
+		
 	if throws_left <= 0:
 		if current_score <= 0:
 			bet_won.emit(current_score)
 			## Send to shop
+			await get_tree().create_timer(1).timeout
 			## Get next score target
 			current_level += 1
 			score_target = ScoreHandler.get_score_target_at_level(current_level)
@@ -61,6 +64,7 @@ func throw_dice():
 			bet_lost.emit()
 			print("lose")
 			## Make restart UI appear
+			UIHandler.show_restart_menu()
 	#############################
 	post_result_calculation.emit(result_of_last_throw, result_of_this_throw, throws_left)
 
