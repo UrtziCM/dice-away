@@ -9,10 +9,12 @@ var InputHandler = get_node("InputHandler")
 @onready
 var UIHandler = get_node("UIHandler")
 
+const Chip = preload("res://Systems/Score/Chips/Chips.gd")
+
 @onready
 var score_target: int = ScoreHandler.get_score_target_at_level(1)
 @onready
-var current_score: int = score_target
+var current_score: int = 0
 
 var max_throws: int = 3
 var throws_left: int = max_throws
@@ -21,52 +23,76 @@ var current_level: int = 0
 var result_of_last_throw: int = 0
 var result_of_this_throw: int = 0
 
+@onready
+var dice_inventory = DiceEngine.dice_inventory
+var chip_inventory:Array[Chip] = []
+
+
+
 signal pre_result_calculation(result_of_last_throw: int, throws_left: int)
 signal post_result_calculation(result_of_last_throw: int, result_of_this_throw: int, throws_left: int)
 
 signal bet_won(winning_score: int)
 signal bet_lost
 
+var ui_values: Dictionary = {
+	"throws_left": throws_left,
+	"max_throws": max_throws,
+	"current_level": current_level,
+	"result_last_throw":result_of_last_throw,
+	"result_current_throw":result_of_this_throw,
+}
+
 func _ready():
-	UIHandler.setup_target_score(score_target, current_score)
-	
+	UIHandler.set_target_score(score_target)
+	_update_dice_inventory()
+
+func _update_dice_inventory():
+	UIHandler.set_dice_inventory(dice_inventory)
+
 func throw_dice():
 	pre_result_calculation.emit(result_of_this_throw, throws_left)
 	############################# 
 	if throws_left > 0:
 		throws_left -= 1
+		#--# UI Updates start #--#
+		UIHandler.reset_conveyor()
+		UIHandler.set_throws_counter(throws_left)
+		UIHandler.reset_current_throw_result_sum()
+		#--# UI Updates end #--#
+		
 		DiceEngine.throw_dice()
+		
+		await DiceEngine.post_all_dice_thrown
 		result_of_last_throw = result_of_this_throw
 		result_of_this_throw = calculate_result(DiceEngine.get_result())
-		current_score -= result_of_this_throw
-		
-		#--# UI Updates #--#
-		UIHandler.update_current_score(score_target, current_score)
-		UIHandler.show_damage_done(result_of_this_throw)
-		
+		current_score += result_of_this_throw 
 	if throws_left <= 0:
-		if current_score <= 0:
+		if current_score >= score_target:
 			bet_won.emit(current_score)
 			## Send to shop
-			await get_tree().create_timer(1).timeout
+			#await get_tree().create_timer(1).timeout
 			## Get next score target
 			current_level += 1
 			score_target = ScoreHandler.get_score_target_at_level(current_level)
 			## Set next score target
-			current_score = score_target
+			current_score = 0
+			
 			## Set throws_left to max_throws
 			throws_left = max_throws
 			
 			#--# UI Updates #--#
-			UIHandler.setup_target_score(score_target, current_score)
-			
+			UIHandler.reset_result_sum()
+			UIHandler.set_throws_counter(throws_left)
+			UIHandler.set_target_score(score_target)
 		else:
 			bet_lost.emit()
 			print("lose")
 			## Make restart UI appear
-			UIHandler.show_restart_menu()
+			
 	#############################
 	post_result_calculation.emit(result_of_last_throw, result_of_this_throw, throws_left)
+	
 
 
 func calculate_result(dice_throw_array: Array[String]) -> int:
@@ -90,3 +116,5 @@ func calculate_result(dice_throw_array: Array[String]) -> int:
 	var final_result = roundf(result_sum * multiplier_mult)
 	# return result of last operation
 	return final_result
+
+

@@ -25,6 +25,7 @@ class Dice:
 		"D4": Dice.new(1,4),
 		"D6": Dice.new(2,6),
 		"D8": Dice.new(3,8),
+		"D20": Dice.new(4,20),
 		"COIN": Dice.new(101,2,true, func():
 			return "x" + str((Dice.RNG.randi() % 2) * 0.5 + 1)),
 		"D4_MULT_SIMPLE": Dice.new(102,4,true, func():
@@ -36,5 +37,5 @@ class Dice:
 		"D100_MULT_RESULT_DIV_TEN": Dice.new(105,100,true, func():
 			return "x" + str(((Dice.RNG.randi() % 100) + 1) / 10 + 1)),
 	}
-	# TODO: 
+
 
