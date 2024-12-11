@@ -5,13 +5,8 @@
 [ext_resource type="Script" path="res://Systems/Score/ScoreHandler.gd" id="3_y1uv0"]
 [ext_resource type="Script" path="res://Systems/PlayerInput/InputHandler.gd" id="4_t6o6p"]
 [ext_resource type="Script" path="res://Systems/UI/UIHandler.gd" id="5_8ebux"]
+[ext_resource type="LabelSettings" uid="uid://d1f67qlciygf3" path="res://Assets/UI/dice_label_settings.tres" id="6_6fuv7"]
 [ext_resource type="FontFile" uid="uid://bk38j05i85a0e" path="res://Assets/UI/Fonts/Polymath-Bold.otf" id="6_x14gv"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_v2obn"]
-font = ExtResource("6_x14gv")
-font_size = 256
-font_color = Color(0.941179, 0.628229, 0.854726, 1)
-outline_size = 42
 
 [sub_resource type="LabelSettings" id="LabelSettings_qnb3g"]
 font_size = 24
@@ -78,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(128, 128)
 text = "1_on_d4"
-label_settings = SubResource("LabelSettings_v2obn")
+label_settings = ExtResource("6_6fuv7")
 horizontal_alignment = 1
 vertical_alignment = 2
 

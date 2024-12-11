@@ -3,6 +3,16 @@ extends Node
 @onready
 var UILayer = get_node("UI")
 
+const DiceLabelSettings = preload("res://Assets/UI/dice_label_settings.tres")
+
+@onready
+var DicePositions = [
+	get_node("UI/DiceThrowingReference/DicePositions/PreDicePositionHidden"),
+	get_node("UI/DiceThrowingReference/DicePositions/PreDicePositionShown"),
+	get_node("UI/DiceThrowingReference/DicePositions/MainDicePosition"),
+	get_node("UI/DiceThrowingReference/DicePositions/PostDicePositionShown"),
+	get_node("UI/DiceThrowingReference/DicePositions/PostDicePositionHidden"),
+]
 @onready
 var UIElements: Dictionary = {
 	"DiceShowingLabel": get_node("UI/DiceShowingLabel"),
@@ -12,15 +22,23 @@ var UIElements: Dictionary = {
 	"TargetScoreLabel": get_node("UI/TargetScoreReference/TargetScoreReference/TargetScoreLabel"),
 	"CurrentThrowResultLabel": get_node("UI/ResultUI/ResultReference/CurrentResultSum/CurrentThrowResultLabel"),
 	"DiceInventoryLabel": get_node("UI/PassivesReference/DiceInventoryReference/DiceInventoryLabel"),
+	"OutOfRotationGroup": get_node("UI/DiceThrowingReference/DicePositions/OutOfPosition"),
+	"DicePositions":get_node("UI/DiceThrowingReference/DicePositions")
 }
 
-# Show random dice numbers while rotating
+
+
+# Should show random dice numbers while rotating? [[
 var change_number_shown: bool = false
+# ]]
 var dice_faces_to_randomize: int = 0
 var last_random_value: int = 0
 
+var dice_ui_inventory: Array[Label] = []
+
 ## Signals
 signal dice_roll_ended
+signal dice_move_ended
 
 static func _translate_to_dice_font(amount,faces):
 	faces = str(faces)
@@ -36,8 +54,10 @@ static func _translate_to_dice_font(amount,faces):
 func set_dice_throw_label_value(value, dice_faces):
 	value = int(value)
 	dice_faces = int(dice_faces)
+	reset_thrown_dice_conveyor()
 	
 	var dice_label = UIElements["DiceShowingLabel"]
+	
 	var dice_rotation_tween: Tween = create_tween()
 	dice_rotation_tween.set_trans(Tween.TRANS_ELASTIC)
 	dice_rotation_tween.set_ease(Tween.EASE_IN_OUT)
@@ -55,8 +75,8 @@ func set_dice_throw_label_value(value, dice_faces):
 	dice_label.rotation = 0
 	
 	add_to_result_sum(value)
-	
 	dice_roll_ended.emit()
+	
 
 func reset_result_sum():
 	UIElements["CurrrentResultSumLabel"].text = str(0)
@@ -73,9 +93,10 @@ func reset_current_throw_result_sum():
 	UIElements["CurrentThrowResultLabel"].text = str(0)
 
 
-func reset_conveyor():
+func reset_thrown_dice_conveyor():
 	var conveyor = UIElements["DiceThrowConveyorLabel"]
 	conveyor.text = ""
+
 func add_roll_to_conveyor(dice_throw_value, faces):
 	var conveyor = UIElements["DiceThrowConveyorLabel"]
 	await dice_roll_ended
@@ -95,6 +116,9 @@ func set_dice_inventory(dice_inventory:Array):
 	inventory_label.text = ""
 	for dice in dice_inventory:
 		inventory_label.text += get_parent().DiceEngine.Dice.dict.find_key(dice).to_lower()
+
+func _ready():
+	pass
 
 func _process(delta):
 	if change_number_shown:

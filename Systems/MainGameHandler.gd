@@ -56,7 +56,6 @@ func throw_dice():
 	if throws_left > 0:
 		throws_left -= 1
 		#--# UI Updates start #--#
-		UIHandler.reset_conveyor()
 		UIHandler.set_throws_counter(throws_left)
 		UIHandler.reset_current_throw_result_sum()
 		#--# UI Updates end #--#

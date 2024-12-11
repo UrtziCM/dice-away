@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://d1f67qlciygf3"]
+
+[ext_resource type="FontFile" uid="uid://bk38j05i85a0e" path="res://Assets/UI/Fonts/Polymath-Bold.otf" id="1_7m1d0"]
+
+[resource]
+font = ExtResource("1_7m1d0")
+font_size = 256
+font_color = Color(0.941179, 0.628229, 0.854726, 1)
+outline_size = 42
