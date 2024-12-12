@@ -1,0 +1,298 @@
+[gd_scene load_steps=13 format=3 uid="uid://ujclrloq1gvv"]
+
+[ext_resource type="Script" path="res://Systems/MainGameHandler.gd" id="1_0118i"]
+[ext_resource type="Script" path="res://Systems/Dice/DiceEngine.gd" id="2_pvraa"]
+[ext_resource type="Script" path="res://Systems/Score/ScoreHandler.gd" id="3_y1uv0"]
+[ext_resource type="Script" path="res://Systems/PlayerInput/InputHandler.gd" id="4_t6o6p"]
+[ext_resource type="Script" path="res://Systems/UI/UIHandler.gd" id="5_8ebux"]
+[ext_resource type="LabelSettings" uid="uid://d1f67qlciygf3" path="res://Assets/UI/dice_label_settings.tres" id="6_6fuv7"]
+[ext_resource type="FontFile" uid="uid://bk38j05i85a0e" path="res://Assets/UI/Fonts/Polymath-Bold.otf" id="6_x14gv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qnb3g"]
+font_size = 24
+font_color = Color(0.941176, 0.627451, 0.854902, 1)
+outline_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_2gjku"]
+font = ExtResource("6_x14gv")
+font_size = 120
+font_color = Color(0.941176, 0.627451, 0.854902, 1)
+outline_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_tisl3"]
+line_spacing = -10.0
+font_size = 56
+font_color = Color(0.941176, 0.627451, 0.854902, 1)
+outline_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_isetj"]
+font_size = 32
+font_color = Color(0.941176, 0.627451, 0.854902, 1)
+outline_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jf6d"]
+font = ExtResource("6_x14gv")
+font_size = 80
+font_color = Color(0.941176, 0.627451, 0.854902, 1)
+outline_size = 12
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Game" type="Node" parent="."]
+script = ExtResource("1_0118i")
+
+[node name="DiceEngine" type="Node" parent="Game"]
+script = ExtResource("2_pvraa")
+
+[node name="ScoreHandler" type="Node" parent="Game"]
+script = ExtResource("3_y1uv0")
+
+[node name="InputHandler" type="Node" parent="Game"]
+script = ExtResource("4_t6o6p")
+
+[node name="ShopHandler" type="Node" parent="Game"]
+
+[node name="Shop" type="CanvasLayer" parent="Game/ShopHandler"]
+
+[node name="UIHandler" type="Node" parent="Game"]
+script = ExtResource("5_8ebux")
+
+[node name="UI" type="CanvasLayer" parent="Game/UIHandler"]
+
+[node name="DiceShowingLabel" type="Label" parent="Game/UIHandler/UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -122.0
+offset_right = 120.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+text = "1_on_d4"
+label_settings = ExtResource("6_6fuv7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TargetScoreReference" type="ReferenceRect" parent="Game/UIHandler/UI"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 520.0
+offset_bottom = 352.0
+border_color = Color(0.0500001, 1, 0, 1)
+border_width = 3.0
+
+[node name="TargetScoreReference" type="ReferenceRect" parent="Game/UIHandler/UI/TargetScoreReference"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 192.0
+offset_right = 496.0
+offset_bottom = 328.0
+border_color = Color(0.0500001, 1, 0, 1)
+border_width = 3.0
+
+[node name="TargetScoreTitleLabel" type="Label" parent="Game/UIHandler/UI/TargetScoreReference/TargetScoreReference"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -32.0
+offset_right = 368.0
+offset_bottom = 7.0
+text = "Target score"
+label_settings = SubResource("LabelSettings_qnb3g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetScoreLabel" type="Label" parent="Game/UIHandler/UI/TargetScoreReference/TargetScoreReference"]
+custom_minimum_size = Vector2(232, 80)
+layout_mode = 2
+offset_right = 480.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 36
+text = "0"
+label_settings = SubResource("LabelSettings_2gjku")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerCurrentScore" type="ReferenceRect" parent="Game/UIHandler/UI/TargetScoreReference"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 496.0
+offset_bottom = 168.0
+border_color = Color(0.0500001, 1, 0, 1)
+border_width = 3.0
+
+[node name="ResultSumLabel" type="Label" parent="Game/UIHandler/UI/TargetScoreReference/PlayerCurrentScore"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -24.0
+offset_right = 368.0
+offset_bottom = 15.0
+text = "Round points"
+label_settings = SubResource("LabelSettings_qnb3g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentResultSumLabel" type="Label" parent="Game/UIHandler/UI/TargetScoreReference/PlayerCurrentScore"]
+custom_minimum_size = Vector2(232, 80)
+layout_mode = 2
+offset_right = 480.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 36
+text = "0"
+label_settings = SubResource("LabelSettings_2gjku")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultUI" type="Control" parent="Game/UIHandler/UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 368.0
+offset_right = 520.0
+offset_bottom = 712.0
+
+[node name="ResultReference" type="ReferenceRect" parent="Game/UIHandler/UI/ResultUI"]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 344.0
+border_color = Color(0.116766, 0.25623, 1, 1)
+border_width = 3.0
+
+[node name="CurrentResultSum" type="ReferenceRect" parent="Game/UIHandler/UI/ResultUI/ResultReference"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 384.0
+offset_bottom = 248.0
+border_color = Color(0.116766, 0.25623, 1, 1)
+border_width = 3.0
+
+[node name="ResultSumLabel" type="Label" parent="Game/UIHandler/UI/ResultUI/ResultReference/CurrentResultSum"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = -40.0
+offset_right = 312.0
+offset_bottom = -1.0
+text = "This throw's points"
+label_settings = SubResource("LabelSettings_qnb3g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentThrowResultLabel" type="Label" parent="Game/UIHandler/UI/ResultUI/ResultReference/CurrentResultSum"]
+custom_minimum_size = Vector2(232, 80)
+layout_mode = 2
+offset_right = 368.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 36
+text = "0"
+label_settings = SubResource("LabelSettings_2gjku")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThrowsLeftReference" type="ReferenceRect" parent="Game/UIHandler/UI/ResultUI/ResultReference"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 56.0
+offset_right = 496.0
+offset_bottom = 248.0
+border_color = Color(0.116766, 0.25623, 1, 1)
+border_width = 3.0
+
+[node name="ThrowsLeftTitle" type="Label" parent="Game/UIHandler/UI/ResultUI/ResultReference/ThrowsLeftReference"]
+layout_mode = 0
+offset_top = -40.0
+offset_right = 96.0
+offset_bottom = -1.0
+text = "Throws"
+label_settings = SubResource("LabelSettings_qnb3g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThrowsLeftLabel" type="Label" parent="Game/UIHandler/UI/ResultUI/ResultReference/ThrowsLeftReference"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 80.0
+offset_bottom = 192.0
+text = "d6d6d6"
+label_settings = SubResource("LabelSettings_tisl3")
+horizontal_alignment = 1
+autowrap_mode = 1
+clip_text = true
+
+[node name="TopThrowCharacterPosition" type="Marker2D" parent="Game/UIHandler/UI/ResultUI/ResultReference/ThrowsLeftReference"]
+position = Vector2(48, 24)
+gizmo_extents = 24.0
+
+[node name="DiceThrowConveyor" type="ReferenceRect" parent="Game/UIHandler/UI/ResultUI/ResultReference"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 288.0
+offset_right = 496.0
+offset_bottom = 328.0
+border_color = Color(0.116766, 0.25623, 1, 1)
+border_width = 3.0
+
+[node name="DiceThrowConveyorLabel" type="Label" parent="Game/UIHandler/UI/ResultUI/ResultReference/DiceThrowConveyor"]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 40.0
+label_settings = SubResource("LabelSettings_isetj")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="ConveyorTitle" type="Label" parent="Game/UIHandler/UI/ResultUI/ResultReference/DiceThrowConveyor"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -40.0
+offset_right = 368.0
+offset_bottom = -1.0
+text = "Current throw"
+label_settings = SubResource("LabelSettings_qnb3g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopReference" type="ReferenceRect" parent="Game/UIHandler/UI"]
+offset_left = 760.0
+offset_top = 8.0
+offset_right = 1272.0
+offset_bottom = 296.0
+border_color = Color(1, 0.760784, 0, 1)
+border_width = 3.0
+
+[node name="PassivesReference" type="ReferenceRect" parent="Game/UIHandler/UI"]
+offset_left = 760.0
+offset_top = 368.0
+offset_right = 1272.0
+offset_bottom = 712.0
+border_width = 3.0
+
+[node name="DiceInventoryReference" type="ReferenceRect" parent="Game/UIHandler/UI/PassivesReference"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 248.0
+offset_bottom = 328.0
+border_width = 3.0
+
+[node name="DiceInventoryLabel" type="Label" parent="Game/UIHandler/UI/PassivesReference/DiceInventoryReference"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 224.0
+offset_bottom = 304.0
+label_settings = SubResource("LabelSettings_4jf6d")
+autowrap_mode = 1
+
+[node name="ChipInventoryReference" type="ReferenceRect" parent="Game/UIHandler/UI/PassivesReference"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 16.0
+offset_right = 496.0
+offset_bottom = 328.0
+border_width = 3.0

@@ -12,16 +12,18 @@ config_version=5
 
 config/name="Dice Away"
 config/version="0.0.1"
+run/main_scene="res://Scenes/Debug/testing_sceme.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 
 [gui]
 
+theme/custom_font="res://Assets/UI/Fonts/Polymath-Bold.otf"
 theme/default_font_antialiasing=0
 theme/default_font_subpixel_positioning=0
 theme/default_font_multichannel_signed_distance_field=true
@@ -109,10 +111,14 @@ shoot_right={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
 ]
 }
+speed_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"echo":false,"script":null)
+]
+}
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 anti_aliasing/screen_space_roughness_limiter/enabled=false

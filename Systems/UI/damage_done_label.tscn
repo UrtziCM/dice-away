@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3vv66ydc2cp4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kr8ww"]
+font_size = 36
+
+[node name="DamageDoneLabel" type="Label"]
+offset_right = 32.0
+offset_bottom = 49.0
+text = "0"
+label_settings = SubResource("LabelSettings_kr8ww")
+horizontal_alignment = 1
+vertical_alignment = 1
