@@ -6,14 +6,6 @@ var UILayer = get_node("UI")
 const DiceLabelSettings = preload("res://Assets/UI/dice_label_settings.tres")
 
 @onready
-var DicePositions = [
-	get_node("UI/DiceThrowingReference/DicePositions/PreDicePositionHidden"),
-	get_node("UI/DiceThrowingReference/DicePositions/PreDicePositionShown"),
-	get_node("UI/DiceThrowingReference/DicePositions/MainDicePosition"),
-	get_node("UI/DiceThrowingReference/DicePositions/PostDicePositionShown"),
-	get_node("UI/DiceThrowingReference/DicePositions/PostDicePositionHidden"),
-]
-@onready
 var UIElements: Dictionary = {
 	"DiceShowingLabel": get_node("UI/DiceShowingLabel"),
 	"CurrrentResultSumLabel": get_node("UI/TargetScoreReference/PlayerCurrentScore/CurrentResultSumLabel"),
@@ -22,11 +14,7 @@ var UIElements: Dictionary = {
 	"TargetScoreLabel": get_node("UI/TargetScoreReference/TargetScoreReference/TargetScoreLabel"),
 	"CurrentThrowResultLabel": get_node("UI/ResultUI/ResultReference/CurrentResultSum/CurrentThrowResultLabel"),
 	"DiceInventoryLabel": get_node("UI/PassivesReference/DiceInventoryReference/DiceInventoryLabel"),
-	"OutOfRotationGroup": get_node("UI/DiceThrowingReference/DicePositions/OutOfPosition"),
-	"DicePositions":get_node("UI/DiceThrowingReference/DicePositions")
 }
-
-
 
 # Should show random dice numbers while rotating? [[
 var change_number_shown: bool = false
